@@ -4,6 +4,7 @@ import type { Project } from '@/types/project'
 const statusStyles: Record<Project['status'], string> = {
   'live-stripe': 'text-green-400 bg-green-400/10 border-green-400/20',
   'live-vps': 'text-green-400 bg-green-400/10 border-green-400/20',
+  deployed: 'text-green-400 bg-green-400/10 border-green-400/20',
   building: 'text-amber-400 bg-amber-400/10 border-amber-400/20',
   client: 'text-indigo-400 bg-indigo-400/10 border-indigo-400/20',
 }
@@ -79,6 +80,19 @@ export function ProjectCard({ project, featured = false, wide = false }: Project
         <h3 className="text-[17px] font-bold text-zinc-50 tracking-tight mb-1.5">{project.name}</h3>
         <p className="text-xs text-zinc-500 leading-relaxed mb-3">{project.cardDescription}</p>
         <StackChips stack={project.stack} accentStack={project.accentStack} />
+        {project.savings && (
+          <div className="inline-flex items-baseline gap-2 mt-4 px-3 py-2 rounded-md border border-amber-400/20 bg-amber-400/5 font-mono">
+            <span className="text-[15px] font-extrabold tracking-tight text-amber-400">
+              ${(
+                ((project.savings.minutesPerDoc * project.savings.docsPerDay) / 60) *
+                260 *
+                project.savings.ratePerHour
+              ).toLocaleString('en-US')}
+              /yr
+            </span>
+            <span className="text-[10px] text-zinc-500">manual review saved · per clerk</span>
+          </div>
+        )}
         <div className="flex items-center gap-1.5 text-[11px] text-amber-400 mt-4 group-hover:gap-2.5 transition-all duration-150">
           View case study <span>→</span>
         </div>

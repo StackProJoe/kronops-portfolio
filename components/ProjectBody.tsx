@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import type { Project } from '@/types/project'
+import { SavingsBand } from '@/components/SavingsBand'
 
 function SectionLabel({ children }: { children: React.ReactNode }) {
   return (
@@ -80,7 +81,7 @@ export function ProjectBody({
                 rel="noopener noreferrer"
                 className="flex items-center gap-2 text-xs text-amber-400 border border-amber-400/20 bg-amber-400/5 px-3 py-2 rounded-md mb-2 hover:bg-amber-400/10 transition-colors"
               >
-                ↗ View live app
+                ↗ Visit live site
               </a>
             )}
             <div className="flex items-center gap-2 text-xs text-zinc-600 border border-[#1a1a1a] px-3 py-2 rounded-md">
@@ -108,6 +109,9 @@ export function ProjectBody({
           </div>
         </div>
       </div>
+
+      {/* Time & money saved */}
+      {project.savings && <SavingsBand savings={project.savings} />}
 
       {/* Prev / Next */}
       <div className="flex items-center justify-between px-8 py-4 border-t border-[#141414] text-xs text-zinc-600">

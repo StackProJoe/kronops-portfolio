@@ -12,8 +12,8 @@ describe('getAllProjects', () => {
     }
   })
 
-  it('first project is noctlore (featured)', () => {
-    expect(getAllProjects()[0].slug).toBe('noctlore')
+  it('first project is swiftdocpro (featured)', () => {
+    expect(getAllProjects()[0].slug).toBe('swiftdocpro')
     expect(getAllProjects()[0].featured).toBe(true)
   })
 })
@@ -32,11 +32,11 @@ describe('getProjectBySlug', () => {
 
 describe('getAdjacentProjects', () => {
   it('prev is null for the first project', () => {
-    expect(getAdjacentProjects('noctlore').prev).toBeNull()
+    expect(getAdjacentProjects('swiftdocpro').prev).toBeNull()
   })
 
-  it('next points to swiftdocpro after noctlore', () => {
-    expect(getAdjacentProjects('noctlore').next?.slug).toBe('swiftdocpro')
+  it('next points to noctlore after swiftdocpro', () => {
+    expect(getAdjacentProjects('swiftdocpro').next?.slug).toBe('noctlore')
   })
 
   it('next is null for the last project', () => {
@@ -44,8 +44,8 @@ describe('getAdjacentProjects', () => {
   })
 
   it('returns both prev and next for a middle project', () => {
-    const { prev, next } = getAdjacentProjects('swiftdocpro')
-    expect(prev?.slug).toBe('noctlore')
+    const { prev, next } = getAdjacentProjects('noctlore')
+    expect(prev?.slug).toBe('swiftdocpro')
     expect(next?.slug).toBe('bodytrack')
   })
 

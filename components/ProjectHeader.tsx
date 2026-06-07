@@ -3,6 +3,7 @@ import type { Project } from '@/types/project'
 const statusStyles: Record<Project['status'], string> = {
   'live-stripe': 'text-green-400 bg-green-400/10 border-green-400/20',
   'live-vps': 'text-green-400 bg-green-400/10 border-green-400/20',
+  deployed: 'text-green-400 bg-green-400/10 border-green-400/20',
   building: 'text-amber-400 bg-amber-400/10 border-amber-400/20',
   client: 'text-indigo-400 bg-indigo-400/10 border-indigo-400/20',
 }
