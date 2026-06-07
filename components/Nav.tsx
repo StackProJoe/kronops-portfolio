@@ -6,7 +6,7 @@ export function Nav() {
     <nav>
       <div className="nav-inner">
         <Link href="/#top" className="wordmark">
-          KR<Image src="/logo.png" alt="o" width={28} height={28} style={{ margin: '0 -1px' }} priority />NOPS
+          KR<Image src="/logo.png" alt="o" width={44} height={44} style={{ margin: '0 -8px' }} priority />NOPS
         </Link>
         <div className="nav-links">
           <Link href="/#work" className="link">
