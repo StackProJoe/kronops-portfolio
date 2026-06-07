@@ -1,10 +1,12 @@
 import Link from 'next/link'
+import Image from 'next/image'
 
 export function Footer() {
   return (
     <footer>
       <div className="foot-inner">
         <Link href="/#top" className="wordmark">
+          <Image src="/logo.png" alt="Kronops" width={22} height={22} />
           KR<span className="o">O</span>NOPS
         </Link>
         <div className="foot-links">
