@@ -6,7 +6,7 @@ export function Footer() {
     <footer>
       <div className="foot-inner">
         <Link href="/#top" className="wordmark">
-          KR<Image src="/logo.png" alt="o" width={18} height={18} />NOPS
+          KR<Image src="/logo.png" alt="o" width={22} height={22} style={{ margin: '0 -1px' }} />NOPS
         </Link>
         <div className="foot-links">
           <Link href="/#work">Work</Link>

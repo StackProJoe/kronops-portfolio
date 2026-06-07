@@ -94,7 +94,7 @@ nav.scrolled { border-bottom-color: var(--border-soft); background: rgba(12, 10,
 .wordmark {
   font-family: var(--font-display); font-weight: 600;
   font-size: 15px; letter-spacing: 0.14em; text-transform: uppercase;
-  color: var(--text); display: flex; align-items: center; gap: 2px;
+  color: var(--text); display: flex; align-items: center; gap: 0;
 }
 .wordmark img { display: block; }
 .wordmark .o { color: var(--accent); }
