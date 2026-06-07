@@ -6,7 +6,7 @@ export function Footer() {
     <footer>
       <div className="foot-inner">
         <Link href="/#top" className="wordmark">
-          <Image src="/logo.png" alt="Kronops" width={22} height={22} />
+          <Image src="/logo.png" alt="Kronops" width={28} height={28} />
           KR<span className="o">O</span>NOPS
         </Link>
         <div className="foot-links">
