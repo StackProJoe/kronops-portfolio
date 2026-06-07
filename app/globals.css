@@ -31,10 +31,10 @@
   --indigo: #818cf8;
 
   --text: #f4f4f5;
-  --text-mid: #a1a1aa;
-  --muted: #71717a;
-  --dim: #52525b;
-  --faint: #3f3f46;
+  --text-mid: #c0c0c8;
+  --muted: #9898a0;
+  --dim: #7a7a83;
+  --faint: #5e5e67;
 
   --font-display: var(--font-sora), "Sora", sans-serif;
   --font-body: var(--font-geist), "Geist", sans-serif;
