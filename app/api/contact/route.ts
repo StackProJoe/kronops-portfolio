@@ -24,7 +24,7 @@ export async function POST(request: Request) {
 
   const resend = new Resend(resendKey)
   const { error } = await resend.emails.send({
-    from: 'Kronops Contact <onboarding@resend.dev>',
+    from: 'Kronops Contact <contact@kronops.com>',
     to: process.env.CONTACT_EMAIL!,
     replyTo: email,
     subject: `New inquiry${type ? ` — ${type}` : ''} from ${name}`,
