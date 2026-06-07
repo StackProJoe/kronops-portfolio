@@ -10,11 +10,11 @@
    ============================================================ */
 :root {
   /* warm-dark background tone */
-  --bg: #0c0a09;
-  --surface: #15110f;
-  --elevated: #1c1714;
-  --border: #2b231d;
-  --border-soft: #1f1812;
+  --bg: #181412;
+  --surface: #211d1a;
+  --elevated: #2a2420;
+  --border: #352d27;
+  --border-soft: #2b2420;
 
   /* blue accent */
   --accent-rgb: 59, 130, 246;
