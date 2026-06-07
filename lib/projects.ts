@@ -183,6 +183,7 @@ export function getAdjacentProjects(slug: string): {
 } {
   const sorted = getAllProjects()
   const index = sorted.findIndex((p) => p.slug === slug)
+  if (index === -1) return { prev: null, next: null }
   return {
     prev: index > 0 ? sorted[index - 1] : null,
     next: index < sorted.length - 1 ? sorted[index + 1] : null,

@@ -48,4 +48,8 @@ describe('getAdjacentProjects', () => {
     expect(prev?.slug).toBe('noctlore')
     expect(next?.slug).toBe('bodytrack')
   })
+
+  it('returns both null for an unknown slug', () => {
+    expect(getAdjacentProjects('invalid')).toEqual({ prev: null, next: null })
+  })
 })
