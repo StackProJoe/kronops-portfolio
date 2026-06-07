@@ -4,6 +4,7 @@ import { StatsStrip } from '@/components/StatsStrip'
 import { ProjectGrid } from '@/components/ProjectGrid'
 import { AboutStrip } from '@/components/AboutStrip'
 import { ContactSection } from '@/components/ContactSection'
+import { Footer } from '@/components/Footer'
 
 export const metadata: Metadata = {
   title: 'Kronops — AI Automation Consulting',
@@ -20,12 +21,15 @@ export const metadata: Metadata = {
 
 export default function Home() {
   return (
-    <main>
-      <Hero />
-      <StatsStrip />
-      <ProjectGrid />
-      <AboutStrip />
-      <ContactSection />
-    </main>
+    <>
+      <main id="top">
+        <Hero />
+        <StatsStrip />
+        <ProjectGrid />
+        <AboutStrip />
+        <ContactSection />
+      </main>
+      <Footer />
+    </>
   )
 }

@@ -3,6 +3,7 @@ import type { Metadata } from 'next'
 import { getAllProjects, getProjectBySlug, getAdjacentProjects } from '@/lib/projects'
 import { ProjectHeader } from '@/components/ProjectHeader'
 import { ProjectBody } from '@/components/ProjectBody'
+import { Footer } from '@/components/Footer'
 
 export async function generateStaticParams() {
   return getAllProjects().map((p) => ({ slug: p.slug }))
@@ -34,9 +35,12 @@ export default async function ProjectPage({
   const { prev, next } = getAdjacentProjects(slug)
 
   return (
-    <main>
-      <ProjectHeader project={project} />
-      <ProjectBody project={project} prev={prev} next={next} />
-    </main>
+    <>
+      <main>
+        <ProjectHeader project={project} />
+        <ProjectBody project={project} prev={prev} next={next} />
+      </main>
+      <Footer />
+    </>
   )
 }

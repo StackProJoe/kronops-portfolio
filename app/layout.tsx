@@ -1,12 +1,28 @@
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
+import { Sora, Geist, Geist_Mono } from 'next/font/google'
 import './globals.css'
 import { Nav } from '@/components/Nav'
+import { ScrollFx } from '@/components/ScrollFx'
 
-const inter = Inter({
+const sora = Sora({
   subsets: ['latin'],
-  weight: ['400', '500', '600', '700', '800'],
-  variable: '--font-inter',
+  weight: ['400', '500', '600', '700'],
+  variable: '--font-sora',
+  display: 'swap',
+})
+
+const geist = Geist({
+  subsets: ['latin'],
+  weight: ['300', '400', '500', '600', '700'],
+  variable: '--font-geist',
+  display: 'swap',
+})
+
+const geistMono = Geist_Mono({
+  subsets: ['latin'],
+  weight: ['400', '500'],
+  variable: '--font-geist-mono',
+  display: 'swap',
 })
 
 export const metadata: Metadata = {
@@ -17,8 +33,9 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={inter.variable}>
-      <body className="bg-[#080808] text-zinc-50 font-sans antialiased min-h-screen">
+    <html lang="en" className={`${sora.variable} ${geist.variable} ${geistMono.variable}`}>
+      <body>
+        <ScrollFx />
         <Nav />
         {children}
       </body>

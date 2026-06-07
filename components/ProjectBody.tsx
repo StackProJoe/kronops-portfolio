@@ -2,28 +2,29 @@ import Link from 'next/link'
 import type { Project } from '@/types/project'
 import { SavingsBand } from '@/components/SavingsBand'
 
-function SectionLabel({ children }: { children: React.ReactNode }) {
+const codeVariant: Record<string, string> = {
+  accent: 'c-accent',
+  string: 'c-str',
+  dim: 'c-dim',
+  keyword: 'c-accent',
+  default: 'c-def',
+}
+
+function CaseLabel({ children }: { children: React.ReactNode }) {
   return (
-    <div className="flex items-center gap-3 mb-4">
-      <span className="text-[10px] text-amber-400 uppercase tracking-[0.15em] font-semibold">{children}</span>
-      <div className="flex-1 h-px bg-[#1a1a1a]" />
+    <div className="case-label">
+      <span className="txt">{children}</span>
+      <span className="ln" />
     </div>
   )
 }
 
-function CodeSnippet({ snippet }: { snippet: NonNullable<Project['codeSnippet']> }) {
-  const variantClass: Record<string, string> = {
-    accent: 'text-amber-400',
-    dim: 'text-zinc-700',
-    string: 'text-green-400',
-    keyword: 'text-indigo-400',
-    default: 'text-zinc-500',
-  }
+function CodeBlock({ snippet }: { snippet: NonNullable<Project['codeSnippet']> }) {
   return (
-    <div className="bg-[#0a0a0a] border border-[#1a1a1a] rounded-md p-4 font-mono text-[11px] leading-[1.9] mt-4">
-      <div className="text-zinc-700 mb-1">{`// ${snippet.filename}`}</div>
+    <div className="code" style={{ marginTop: 22 }}>
+      <div className="fn">{`// ${snippet.filename}`}</div>
       {snippet.lines.map((line, i) => (
-        <div key={i} className={variantClass[line.variant]}>
+        <div key={i} className={codeVariant[line.variant] ?? 'c-def'}>
           {line.text}
         </div>
       ))}
@@ -41,95 +42,84 @@ export function ProjectBody({
   next: Project | null
 }) {
   return (
-    <div>
-      <div className="grid grid-cols-1 md:grid-cols-[1fr_260px]">
-        {/* Main content */}
-        <div className="px-8 py-8 border-r border-[#141414] flex flex-col gap-8">
-          <div>
-            <SectionLabel>The Problem</SectionLabel>
-            <p className="text-sm text-zinc-500 leading-[1.85]">{project.problem}</p>
-          </div>
+    <>
+      <div className="body-grid">
+        <div className="main-col">
+          <section className="reveal">
+            <CaseLabel>The Problem</CaseLabel>
+            <p className="prose">{project.problem}</p>
+          </section>
 
-          <div>
-            <SectionLabel>What I Built</SectionLabel>
-            <ul className="flex flex-col gap-3">
+          <section className="reveal">
+            <CaseLabel>What I Built</CaseLabel>
+            <div className="built-list">
               {project.builtPoints.map((point) => (
-                <li key={point} className="flex gap-3 text-sm text-zinc-500 leading-relaxed">
-                  <span className="text-amber-400 text-xs mt-0.5 flex-shrink-0">→</span>
-                  {point}
-                </li>
-              ))}
-            </ul>
-            {project.codeSnippet && <CodeSnippet snippet={project.codeSnippet} />}
-          </div>
-
-          <div>
-            <SectionLabel>Key Technical Decisions</SectionLabel>
-            <p className="text-sm text-zinc-500 leading-[1.85]">{project.technicalDecisions}</p>
-          </div>
-        </div>
-
-        {/* Sidebar */}
-        <div className="px-6 py-8 flex flex-col gap-6">
-          {/* Links */}
-          <div>
-            <div className="text-[9px] text-zinc-700 uppercase tracking-wider mb-2">Links</div>
-            {project.liveUrl && (
-              <a
-                href={project.liveUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-2 text-xs text-amber-400 border border-amber-400/20 bg-amber-400/5 px-3 py-2 rounded-md mb-2 hover:bg-amber-400/10 transition-colors"
-              >
-                ↗ Visit live site
-              </a>
-            )}
-            <div className="flex items-center gap-2 text-xs text-zinc-600 border border-[#1a1a1a] px-3 py-2 rounded-md">
-              {project.githubPrivate ? '⌥ GitHub (private)' : '⌥ GitHub'}
-            </div>
-          </div>
-
-          {/* Outcomes */}
-          <div>
-            <div className="text-[9px] text-zinc-700 uppercase tracking-wider mb-2">Outcomes</div>
-            <div className="flex flex-col gap-2">
-              {project.outcomes.map((o) => (
-                <div key={o} className="flex gap-2 text-xs text-zinc-500 leading-relaxed">
-                  <span className="text-green-400 mt-0.5 flex-shrink-0">·</span>
-                  {o}
+                <div key={point} className="built-item">
+                  <span className="ar">→</span> {point}
                 </div>
               ))}
             </div>
+            {project.codeSnippet && <CodeBlock snippet={project.codeSnippet} />}
+          </section>
+
+          <section className="reveal">
+            <CaseLabel>Key Technical Decisions</CaseLabel>
+            <p className="prose">{project.technicalDecisions}</p>
+          </section>
+        </div>
+
+        <aside className="side-col">
+          <div className="side-block reveal">
+            <div className="side-h">Links</div>
+            {project.liveUrl && (
+              <a className="link-btn live" href={project.liveUrl} target="_blank" rel="noopener noreferrer">
+                ↗ Visit live site
+              </a>
+            )}
+            <div className="link-btn gh">
+              {project.githubPrivate ? '⌥ GitHub · private' : '⌥ GitHub · available on request'}
+            </div>
           </div>
 
-          {/* Relevant for */}
-          <div>
-            <div className="text-[9px] text-zinc-700 uppercase tracking-wider mb-2">Relevant for</div>
-            <p className="text-[11px] text-zinc-600 leading-relaxed">{project.relevantFor}</p>
+          <div className="side-block reveal" data-d="1">
+            <div className="side-h">Outcomes</div>
+            {project.outcomes.map((o) => (
+              <div key={o} className="outcome">
+                <span className="dot">·</span> {o}
+              </div>
+            ))}
           </div>
-        </div>
+
+          <div className="side-block reveal" data-d="2">
+            <div className="side-h">Relevant for</div>
+            <p className="relevant">{project.relevantFor}</p>
+          </div>
+        </aside>
       </div>
 
-      {/* Time & money saved */}
       {project.savings && <SavingsBand savings={project.savings} />}
 
-      {/* Prev / Next */}
-      <div className="flex items-center justify-between px-8 py-4 border-t border-[#141414] text-xs text-zinc-600">
+      <section className="cta-strip">
+        <div className="cta-glow" />
+        <div className="cta-inner">
+          <h2>
+            Have a workflow that needs <span className="amber">this kind of system?</span>
+          </h2>
+          <p>If you want something built the same way — end to end, shipped, in production — let&apos;s talk.</p>
+          <Link href="/#contact" className="btn btn-primary">
+            Work with me →
+          </Link>
+        </div>
+      </section>
+
+      <div className="pn">
         {prev ? (
-          <Link href={`/work/${prev.slug}`} className="hover:text-zinc-400 transition-colors">
-            ← {prev.name}
-          </Link>
+          <Link href={`/work/${prev.slug}`}>← {prev.name}</Link>
         ) : (
-          <Link href="/#work" className="hover:text-zinc-400 transition-colors">
-            ← Back to all work
-          </Link>
+          <Link href="/#work">← All work</Link>
         )}
-        {next && (
-          <Link href={`/work/${next.slug}`} className="hover:text-zinc-400 transition-colors">
-            {next.name} →
-          </Link>
-        )}
+        {next && <Link href={`/work/${next.slug}`}>{next.name} →</Link>}
       </div>
-    </div>
+    </>
   )
 }

@@ -51,63 +51,49 @@ export function ContactForm() {
 
   if (status === 'success') {
     return (
-      <div className="flex flex-col items-center justify-center h-full py-16 gap-3">
-        <div className="text-2xl text-amber-400">✓</div>
-        <p className="text-sm text-zinc-50 font-semibold">Message sent.</p>
-        <p className="text-xs text-zinc-500">I&apos;ll reply within 24 hours.</p>
+      <div className="form-success">
+        <div className="check">✓</div>
+        <h4>Got it — talk soon.</h4>
+        <p>I&apos;ll get back to you within 24 hours.</p>
       </div>
     )
   }
 
-  const inputClass =
-    'w-full bg-[#0d0d0d] border border-[#1f1f1f] rounded-md px-3 py-2.5 text-sm text-zinc-300 placeholder:text-zinc-700 focus:outline-none focus:border-amber-400/40 transition-colors duration-150'
-
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col gap-5">
-      <div className="grid grid-cols-2 gap-4">
-        <div>
-          <label className="block text-[10px] text-zinc-600 uppercase tracking-wider mb-1.5">
-            Name <span className="text-amber-400">*</span>
-          </label>
-          <input
-            type="text"
-            required
-            value={form.name}
-            onChange={(e) => set('name', e.target.value)}
-            placeholder="Your name"
-            className={inputClass}
-          />
-        </div>
-        <div>
-          <label className="block text-[10px] text-zinc-600 uppercase tracking-wider mb-1.5">
-            Email <span className="text-amber-400">*</span>
-          </label>
-          <input
-            type="email"
-            required
-            value={form.email}
-            onChange={(e) => set('email', e.target.value)}
-            placeholder="you@company.com"
-            className={inputClass}
-          />
-        </div>
+    <form onSubmit={handleSubmit} noValidate>
+      <div className="field">
+        <label htmlFor="name">Your name</label>
+        <input
+          id="name"
+          type="text"
+          required
+          value={form.name}
+          onChange={(e) => set('name', e.target.value)}
+          placeholder="Jane Doe"
+        />
       </div>
 
-      <div>
-        <label className="block text-[10px] text-zinc-600 uppercase tracking-wider mb-1.5">
-          What do you need?
-        </label>
-        <div className="grid grid-cols-2 gap-2">
+      <div className="field">
+        <label htmlFor="email">Email</label>
+        <input
+          id="email"
+          type="email"
+          required
+          value={form.email}
+          onChange={(e) => set('email', e.target.value)}
+          placeholder="jane@company.com"
+        />
+      </div>
+
+      <div className="field">
+        <label>What do you need?</label>
+        <div className="type-grid">
           {INQUIRY_TYPES.map((t) => (
             <button
               key={t}
               type="button"
               onClick={() => set('type', form.type === t ? '' : t)}
-              className={`text-[11px] px-3 py-2 border rounded-md text-left transition-colors duration-150 ${
-                form.type === t
-                  ? 'border-amber-400/40 text-amber-400 bg-amber-400/[0.06]'
-                  : 'border-[#1f1f1f] text-zinc-600 hover:border-zinc-700 hover:text-zinc-400'
-              }`}
+              className={`type-btn${form.type === t ? ' on' : ''}`}
             >
               {t}
             </button>
@@ -115,49 +101,38 @@ export function ContactForm() {
         </div>
       </div>
 
-      <div>
-        <label className="block text-[10px] text-zinc-600 uppercase tracking-wider mb-1.5">
-          Business / company
-          <span className="normal-case text-zinc-700 ml-1 tracking-normal">— helps me prep</span>
+      <div className="field">
+        <label htmlFor="business">
+          Business / company<span className="opt">— helps me prep</span>
         </label>
         <input
+          id="business"
           type="text"
           value={form.business}
           onChange={(e) => set('business', e.target.value)}
           placeholder="Optional"
-          className={inputClass}
         />
       </div>
 
-      <div>
-        <label className="block text-[10px] text-zinc-600 uppercase tracking-wider mb-1.5">
-          Describe the problem <span className="text-amber-400">*</span>
-        </label>
+      <div className="field">
+        <label htmlFor="problem">What&apos;s slowing you down?</label>
         <textarea
+          id="problem"
           required
+          rows={4}
           value={form.problem}
           onChange={(e) => set('problem', e.target.value)}
-          rows={4}
-          placeholder="What's the task you're doing manually 10x a day? What's the process you wish was faster?"
-          className={`${inputClass} resize-none leading-relaxed`}
+          placeholder="Describe the bottleneck — the manual task, the slow process, the thing that eats your week."
         />
       </div>
 
-      {status === 'error' && (
-        <p className="text-xs text-red-400">{errorMsg}</p>
-      )}
+      {status === 'error' && <div className="field-err">{errorMsg}</div>}
 
-      <button
-        type="submit"
-        disabled={status === 'loading'}
-        className="w-full bg-amber-400 text-black text-sm font-bold py-3 rounded-md hover:bg-amber-300 disabled:opacity-60 disabled:cursor-not-allowed transition-colors duration-150"
-      >
-        {status === 'loading' ? 'Sending...' : 'Send message →'}
+      <button type="submit" disabled={status === 'loading'} className="btn btn-primary submit-btn">
+        {status === 'loading' ? 'Sending…' : 'Send it over →'}
       </button>
 
-      <p className="text-[11px] text-zinc-700 text-center">
-        No spam. No sales sequence. Just a real reply.
-      </p>
+      <p className="form-note">No spam. No sales sequence. Just a real reply.</p>
     </form>
   )
 }
