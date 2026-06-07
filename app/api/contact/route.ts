@@ -1,6 +1,5 @@
 import { Resend } from 'resend'
 
-const resend = new Resend(process.env.RESEND_API_KEY)
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
 export async function POST(request: Request) {
@@ -18,6 +17,12 @@ export async function POST(request: Request) {
     return Response.json({ error: 'Please enter a valid email address.' }, { status: 400 })
   }
 
+  const resendKey = process.env.RESEND_API_KEY
+  if (!resendKey) {
+    return Response.json({ error: 'Email service not configured.' }, { status: 503 })
+  }
+
+  const resend = new Resend(resendKey)
   const { error } = await resend.emails.send({
     from: 'Kronops Contact <contact@kronops.com>',
     to: process.env.CONTACT_EMAIL!,
