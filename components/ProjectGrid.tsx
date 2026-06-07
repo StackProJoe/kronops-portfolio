@@ -3,8 +3,8 @@ import { ProjectCard } from '@/components/ProjectCard'
 
 export function ProjectGrid() {
   const projects = getAllProjects()
+  if (projects.length < 4) return null
   const [featured, ...rest] = projects
-  // rest[0]=swiftdocpro, rest[1]=bodytrack, rest[2]=acwdi
 
   return (
     <section id="work" className="px-8 py-10">
