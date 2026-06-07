@@ -6,8 +6,7 @@ export function Nav() {
     <nav>
       <div className="nav-inner">
         <Link href="/#top" className="wordmark">
-          <Image src="/logo.png" alt="Kronops" width={36} height={36} priority />
-          KR<span className="o">O</span>NOPS
+          KR<Image src="/logo.png" alt="o" width={22} height={22} priority />NOPS
         </Link>
         <div className="nav-links">
           <Link href="/#work" className="link">

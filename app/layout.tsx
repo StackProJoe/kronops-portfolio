@@ -29,10 +29,6 @@ export const metadata: Metadata = {
   title: 'Kronops — AI Automation Consulting',
   description:
     'I go into businesses, find bottlenecks, and implement AI and automation that saves time and increases profit.',
-  icons: {
-    icon: '/logo.png',
-    apple: '/logo.png',
-  },
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
