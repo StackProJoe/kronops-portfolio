@@ -56,7 +56,7 @@ function CardInner({ project }: { project: Project }) {
       {saved && (
         <div className="save-tag">
           <span className="amt">${saved}/yr</span>
-          <span className="lab">manual review saved · per clerk</span>
+          <span className="lab">est. manual review saved · per clerk</span>
         </div>
       )}
       <span className="view">View case study →</span>
